@@ -8,11 +8,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
-  const auth = { username: "patrick.cosme", password: "1234" };
-  const headers = {
+  const [auth] = useState({ username: "patrick.cosme", password: "1234" });
+  const [headers] = useState({
     'Accept': 'application/json',
     'Content-Type': 'application/json'
-  };
+  });
   const [show, setShow] = useState(false);
   const [key, setKey] = useState('');
   const [token, setToken] = useState('');
