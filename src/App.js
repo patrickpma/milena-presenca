@@ -37,7 +37,6 @@ function App() {
   };
 
   const handleSave = () => {
-    headers['Authorization'] = 'Bearer ' + token
 
     for (let index = 0; index < convidados.length; index++) {
       const element = convidados[index];
