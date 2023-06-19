@@ -8,21 +8,19 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
-  const [auth] = useState({ username: "patrick.cosme", password: "1234" });
-  const [headers] = useState({
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  });
   const [show, setShow] = useState(false);
   const [key, setKey] = useState('');
   const [token, setToken] = useState('');
   const [convidados, setConvidados] = useState([]);
 
   const fetchData = () => {
-    fetch('https://api.veolink.com.br/api/' + 'auth', {
-      headers: headers,
+    fetch('https://api.veolink.com.br/api/auth', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
       method: 'POST',
-      body: JSON.stringify(auth)
+      body: JSON.stringify({ username: "patrick.cosme", password: "1234" })
     })
       .then(res => res.json())
       .then(json => {
@@ -44,7 +42,11 @@ function App() {
     for (let index = 0; index < convidados.length; index++) {
       const element = convidados[index];
       fetch('https://api.veolink.com.br/api/portal/crud/_Table_1/' + element.column1 + '/column1', {
-        headers: headers,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
         body: JSON.stringify(element),
         method: 'PUT',
       }).then(res => res.json()).catch(error => console.log(error));;
@@ -62,9 +64,12 @@ function App() {
       return;
     }
 
-    headers['Authorization'] = 'Bearer ' + token;
     fetch(`https://api.veolink.com.br/api/portal/crud/_Table_1?filter=${where}`, {
-      headers: headers,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
       method: 'GET',
     }).then(res => res.json()).then(json => {
 
