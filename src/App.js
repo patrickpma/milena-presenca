@@ -102,19 +102,50 @@ function App() {
   }
 
   return (
-    <div className="card-body">
-      <section className="content">
-        <div className="card-body">
-          <div className="card-body">
-            <div className="input-group input-group-lg">
-              <input type="text" className="form-control" placeholder="Digite a chave do convite" aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={handleChange} value={key} />
-              <span className="input-group-append">
-                <button type="button" className="btn btn-success btn-flat" onClick={handleShow}>Seguir</button>
-              </span>
+    <div className="content" style={{ "minHeight": "2171.31px" }}>
+
+      <section className="content-header">
+        <div className="container-fluid">
+          <div className="row mb-2">
+            <div className="col-sm-6">
+              <h1>Milena 15 Anos</h1>
+            </div>
+            <div className="col-sm-6">
+              <ol className="breadcrumb float-sm-right">
+                <li className="breadcrumb-item"><a href="#">Home</a></li>
+                <li className="breadcrumb-item active">Milena 15 Anos</li>
+              </ol>
             </div>
           </div>
         </div>
       </section>
+
+      <section className="content">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="card card-secondary card-outline">
+                <form>
+                  <div className="card-body">
+                    <div className="form-group">
+                      <label >Confirme a presença de sua família</label>
+                      <div className="input-group input-group-lg">
+                        <input type="text" className="form-control" placeholder="Digite a chave do convite" aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={handleChange} value={key} />
+                        <span className="input-group-append">
+                          <button type="button" className="btn btn-success btn-flat" onClick={handleShow}>Seguir</button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div></div>
+      </section>
+
+
+
       <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} size='lg'>
         <Modal.Header closeButton>
           <Modal.Title>Confirme quais convidados comparecerão</Modal.Title>
@@ -165,6 +196,7 @@ function App() {
         theme="colored"
       />
     </div>
+
   );
 }
 
