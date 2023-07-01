@@ -63,7 +63,7 @@ function App() {
       return;
     }
 
-    fetch(`https://api.veolink.com.br/api/portal/crud/_Table_1?filter=${where}`, {
+    fetch(`https://api.veolink.com.br/api/portal/crud/_Table_1?filter=${where.toUpperCase()}`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
