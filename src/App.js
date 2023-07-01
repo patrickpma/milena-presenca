@@ -86,7 +86,14 @@ function App() {
       if (filtered.length === 0)
         toast.error('Código digitado não encontrado.');
       else {
-        setConvidados(json.data.filter(c => c.column3 === key));
+        setConvidados(json.data.filter(c => c.column3 === key).sort((a, b) => {
+          if (a.column2 > b.column2)
+            return 1;
+          if (a.column2 < b.column2)
+            return -1;
+          // a must be equal to b
+          return 0;
+        }));
         setShow(true);
         setKey('');
       }
@@ -141,7 +148,7 @@ function App() {
                       <div className="input-group input-group-lg">
                         <input type="text" className="form-control" placeholder={!expire ? "Digite o código do convite" : "Prazo para confirmação encerrado"} aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={handleChange} value={key} readOnly={expire} />
                         <span className="input-group-append">
-                          <button type="button" className={expire ?"btn btn-success disabled btn-flat" :"btn btn-success btn-flat"} onClick={handleShow}>Seguir</button>
+                          <button type="button" className={expire ? "btn btn-success disabled btn-flat" : "btn btn-success btn-flat"} onClick={handleShow}>Seguir</button>
                         </span>
                       </div>
                     </div>
