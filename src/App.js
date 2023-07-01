@@ -59,7 +59,7 @@ function App() {
     let where = '';
 
     if (!key) {
-      toast.error('Você esqueceu de informar a chave.');
+      toast.error('Você esqueceu de informar o Código.');
       return;
     }
 
@@ -75,7 +75,7 @@ function App() {
       let filtered = json.data.filter(c => c.column3 === key);
 
       if (filtered.length === 0)
-        toast.error('Chave digitada não encontrada.');
+        toast.error('Código digitado não encontrado.');
       else {
         setConvidados(json.data.filter(c => c.column3 === key));
         setShow(true);
@@ -130,7 +130,7 @@ function App() {
                     <div className="form-group">
                       <label >Confirme a presença de sua família</label>
                       <div className="input-group input-group-lg">
-                        <input type="text" className="form-control" placeholder="Digite a chave do convite" aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={handleChange} value={key} />
+                        <input type="text" className="form-control" placeholder="Digite o código do convite" aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={handleChange} value={key} />
                         <span className="input-group-append">
                           <button type="button" className="btn btn-success btn-flat" onClick={handleShow}>Seguir</button>
                         </span>
