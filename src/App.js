@@ -11,7 +11,7 @@ function App() {
   const [show, setShow] = useState(false);
   const [key, setKey] = useState('');
   const [token, setToken] = useState('');
-  const [expire, setExpire] = useState('');
+  const [expire, setExpire] = useState(false);
   const [convidados, setConvidados] = useState([]);
 
   const fetchData = () => {
@@ -44,7 +44,6 @@ function App() {
   };
 
   const handleSave = () => {
-
     for (let index = 0; index < convidados.length; index++) {
       const element = convidados[index];
       fetch('https://api.veolink.com.br/api/portal/crud/_Table_1/' + element.column1 + '/column1', {
@@ -63,6 +62,9 @@ function App() {
   };
 
   const handleShow = () => {
+    if (expire)
+      return;
+
     let where = '';
 
     if (!key) {
@@ -139,7 +141,7 @@ function App() {
                       <div className="input-group input-group-lg">
                         <input type="text" className="form-control" placeholder={!expire ? "Digite o código do convite" : "Prazo para confirmação encerrado"} aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={handleChange} value={key} readOnly={expire} />
                         <span className="input-group-append">
-                          <button type="button" className="btn btn-success btn-flat" onClick={handleShow}>Seguir</button>
+                          <button type="button" className={expire ?"btn btn-success disabled btn-flat" :"btn btn-success btn-flat"} onClick={handleShow}>Seguir</button>
                         </span>
                       </div>
                     </div>
