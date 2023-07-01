@@ -11,9 +11,16 @@ function App() {
   const [show, setShow] = useState(false);
   const [key, setKey] = useState('');
   const [token, setToken] = useState('');
+  const [expire, setExpire] = useState('');
   const [convidados, setConvidados] = useState([]);
 
   const fetchData = () => {
+
+    let hoje = new Date();
+    let dataLimite = new Date(2023, 7, 10);
+
+    setExpire(hoje > dataLimite);
+
     fetch('https://api.veolink.com.br/api/auth', {
       headers: {
         'Accept': 'application/json',
@@ -63,7 +70,7 @@ function App() {
       return;
     }
 
-    fetch(`https://api.veolink.com.br/api/portal/crud/_Table_1?filter=${where.toUpperCase()}`, {
+    fetch(`https://api.veolink.com.br/api/portal/crud/_Table_1?filter=${where}`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -88,7 +95,7 @@ function App() {
 
   const handleChange = (e) => {
     let value = e.target[e.target.type === "checkbox" ? "checked" : "value"];
-    setKey(value);
+    setKey(value.toUpperCase());
   }
 
   const handleCheck = (e) => {
@@ -128,9 +135,9 @@ function App() {
                 <form>
                   <div className="card-body">
                     <div className="form-group">
-                      <label >Confirme a presença de sua família</label>
+                      <label >Confirme a presença de sua família até dia 10/08/2023</label>
                       <div className="input-group input-group-lg">
-                        <input type="text" className="form-control" placeholder="Digite o código do convite" aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={handleChange} value={key} />
+                        <input type="text" className="form-control" placeholder={!expire ? "Digite o código do convite" : "Prazo para confirmação encerrado"} aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={handleChange} value={key} readOnly={expire} />
                         <span className="input-group-append">
                           <button type="button" className="btn btn-success btn-flat" onClick={handleShow}>Seguir</button>
                         </span>
@@ -147,7 +154,7 @@ function App() {
 
 
       <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} size='lg'>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Confirme quais convidados comparecerão</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -170,6 +177,9 @@ function App() {
                         </tr>
                       )
                     })}
+                    <tr>
+                      <td colspan="2"><span className='float-right'><strong>{"*Confirme sua presença até dia 10/08/2023"}</strong></span></td>
+                    </tr>
                   </tbody>
                 </Table>
               </div>
