@@ -5,6 +5,8 @@ import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import gift from "./img/gift-box-icon-in-trendy-minimalist-style-vector-35044335.jpg";
+import grandeDia from "./img/para--o-grande-dia-base.jpg";
 
 function App() {
 
@@ -27,7 +29,7 @@ function App() {
         'Content-Type': 'application/json'
       },
       method: 'POST',
-      body: JSON.stringify({ username: "patrick.cosme", password: "1234" })
+      body: JSON.stringify({ username: "patrick.oliveira@veolink.com.br", password: "1234" })
     })
       .then(res => res.json())
       .then(json => {
@@ -117,6 +119,11 @@ function App() {
     setConvidados(convidadosCopy);
   }
 
+  const handleDica = (i) => {
+    setShow(true);
+
+  }
+
   return (
     <div className="content" style={{ "minHeight": "2171.31px" }}>
 
@@ -152,6 +159,17 @@ function App() {
                         </span>
                       </div>
                     </div>
+                    <div className="row">
+                      <div className="col-5 col-sm-4">
+                        <img class="profile-user-img img-fluid img-circle" src={gift} alt="User profile picture" />
+                      </div>
+                      <div className="col-5 col-sm-4">
+                        <img class="profile-user-img img-fluid img-circle" src={gift} alt="User profile picture" />
+                      </div>
+                      <div className="col-5 col-sm-4">
+                        <img class="profile-user-img img-fluid img-circle" src={gift} alt="User profile picture" onClick={() => handleDica(1)} />
+                      </div>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -162,7 +180,7 @@ function App() {
 
 
 
-      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} size='lg'>
+      {/* <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} size='lg'>
         <Modal.Header>
           <Modal.Title>Confirme quais convidados comparecerão</Modal.Title>
         </Modal.Header>
@@ -197,6 +215,20 @@ function App() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="success" onClick={handleSave}>Confirmar</Button>
+          <Button variant="secondary" onClick={handleClose}>
+            Fechar
+          </Button>
+        </Modal.Footer>
+      </Modal> */}
+      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+        <Modal.Body>
+          <div>
+            <section className="content">
+              <img class="" src={grandeDia} alt="User profile picture" />
+            </section>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Fechar
           </Button>
