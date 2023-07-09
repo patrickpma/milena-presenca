@@ -159,17 +159,6 @@ function App() {
                         </span>
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-5 col-sm-4">
-                        <img class="profile-user-img img-fluid img-circle" src={gift} alt="User profile picture" />
-                      </div>
-                      <div className="col-5 col-sm-4">
-                        <img class="profile-user-img img-fluid img-circle" src={gift} alt="User profile picture" />
-                      </div>
-                      <div className="col-5 col-sm-4">
-                        <img class="profile-user-img img-fluid img-circle" src={gift} alt="User profile picture" onClick={() => handleDica(1)} />
-                      </div>
-                    </div>
                   </div>
                 </form>
               </div>
