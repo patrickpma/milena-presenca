@@ -5,8 +5,10 @@ import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import gift from "./img/gift-box-icon-in-trendy-minimalist-style-vector-35044335.jpg";
+import Imagem from './Imagem';
 import grandeDia from "./img/para--o-grande-dia-base.jpg";
+import ficaDica from "./img/fica-a-dica-base.jpg";
+
 
 function App() {
 
@@ -119,11 +121,6 @@ function App() {
     setConvidados(convidadosCopy);
   }
 
-  const handleDica = (i) => {
-    setShow(true);
-
-  }
-
   return (
     <div className="content" style={{ "minHeight": "2171.31px" }}>
 
@@ -142,26 +139,56 @@ function App() {
           </div>
         </div>
       </section>
-
       <section className="content">
+        <div className="row">
+          <div className="col-12 col-sm-12">
+            <div className="card card-primary card-tabs">
+              <div className="card-header p-0 pt-1">
+                <ul className="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                  <li className="nav-item">
+                    <a className="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Confirmar Presença</a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Para o Grande Dia</a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Fica a Dica</a>
+                  </li>
+                </ul>
+              </div>
+              <div className="card-body">
+                <div className="tab-content" id="custom-tabs-one-tabContent">
+                  <div className="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                    <form>
+                      <div className="form-group">
+                        <label >Confirme a presença de sua família até dia 10/08/2023</label>
+                        <div className="input-group input-group-lg">
+                          <input type="text" className="form-control" placeholder={!expire ? "Digite o código do convite" : "Prazo para confirmação encerrado"} aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={handleChange} value={key} readOnly={expire} />
+                          <span className="input-group-append">
+                            <button type="button" className={expire ? "btn btn-success disabled btn-flat" : "btn btn-success btn-flat"} onClick={handleShow}>Seguir</button>
+                          </span>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div className="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+                    <Imagem>
+                      <img className="" src={grandeDia} alt="grande dia" />
+                    </Imagem>
+                  </div>
+                  <div className="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+                    <Imagem>
+                    <img className="" src={ficaDica} alt="Fica a dica" />
+                    </Imagem>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div></div>
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-12">
-              <div className="card card-secondary card-outline">
-                <form>
-                  <div className="card-body">
-                    <div className="form-group">
-                      <label >Confirme a presença de sua família até dia 10/08/2023</label>
-                      <div className="input-group input-group-lg">
-                        <input type="text" className="form-control" placeholder={!expire ? "Digite o código do convite" : "Prazo para confirmação encerrado"} aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={handleChange} value={key} readOnly={expire} />
-                        <span className="input-group-append">
-                          <button type="button" className={expire ? "btn btn-success disabled btn-flat" : "btn btn-success btn-flat"} onClick={handleShow}>Seguir</button>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
+
 
             </div>
           </div></div>
@@ -169,7 +196,7 @@ function App() {
 
 
 
-      {/* <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} size='lg'>
+      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} size='lg'>
         <Modal.Header>
           <Modal.Title>Confirme quais convidados comparecerão</Modal.Title>
         </Modal.Header>
@@ -204,20 +231,6 @@ function App() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="success" onClick={handleSave}>Confirmar</Button>
-          <Button variant="secondary" onClick={handleClose}>
-            Fechar
-          </Button>
-        </Modal.Footer>
-      </Modal> */}
-      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-        <Modal.Body>
-          <div>
-            <section className="content">
-              <img class="" src={grandeDia} alt="User profile picture" />
-            </section>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Fechar
           </Button>
