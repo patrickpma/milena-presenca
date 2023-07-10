@@ -165,7 +165,7 @@ function App() {
                         <div className="input-group input-group-lg">
                           <input type="text" className="form-control" placeholder={!expire ? "Digite o código do convite" : "Prazo para confirmação encerrado"} aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={handleChange} value={key} readOnly={expire} />
                           <span className="input-group-append">
-                            <button type="button" className={expire ? "btn btn-success disabled btn-flat" : "btn btn-success btn-flat"} onClick={handleShow}>Seguir</button>
+                            <span class="input-group-text" className={expire ? "input-group-text disabled" : "input-group-text"} onClick={handleShow}><i class="fas fa-search"></i></span>
                           </span>
                         </div>
                       </div>
