@@ -21,7 +21,7 @@ function App() {
   const fetchData = () => {
 
     let hoje = new Date();
-    let dataLimite = new Date(2023, 7, 10);
+    let dataLimite = new Date(2023, 7, 11);
 
     setExpire(hoje > dataLimite);
 
