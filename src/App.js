@@ -5,9 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Imagem from './Imagem';
-import grandeDia from "./img/para--o-grande-dia-base.jpg";
-import ficaDica from "./img/fica-a-dica-base.jpg";
+import background from "../src/img/02.png";
 
 
 function App() {
@@ -21,7 +19,7 @@ function App() {
   const fetchData = () => {
 
     let hoje = new Date();
-    let dataLimite = new Date(2023, 7, 11);
+    let dataLimite = new Date(2023, 8, 27);
 
     setExpire(hoje > dataLimite);
 
@@ -122,106 +120,115 @@ function App() {
   }
 
   return (
-    <div className="content" style={{ "minHeight": "2171.31px" }}>
+    // <div className="content" style={{ "minHeight": "2171.31px" }}>
 
-      <section className="content-header">
-        <div className="container-fluid">
-          <div className="row mb-2">
-            <div className="col-sm-6">
-              <h1>Milena 15 Anos</h1>
-            </div>
-            <div className="col-sm-6">
-              <ol className="breadcrumb float-sm-right">
-                <li className="breadcrumb-item">Home</li>
-                <li className="breadcrumb-item active">Milena 15 Anos</li>
-              </ol>
-            </div>
+    //   <section className="content-header">
+    //     <div className="container-fluid">
+    //       <div className="row mb-2">
+    //         <div className="col-sm-6">
+    //           <h1>Milena 15 Anos</h1>
+    //         </div>
+    //         <div className="col-sm-6">
+    //           <ol className="breadcrumb float-sm-right">
+    //             <li className="breadcrumb-item">Home</li>
+    //             <li className="breadcrumb-item active">Milena 15 Anos</li>
+    //           </ol>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </section>
+    //   <section className="content">
+    //     <div className="row">
+    //       <div className="col-12 col-sm-12">
+    //         <div className="card card-primary card-tabs">
+    //           <div className="card-header p-0 pt-1">
+    //             <ul className="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+    //               <li className="nav-item">
+    //                 <a className="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Confirmar Presença</a>
+    //               </li>
+    //             </ul>
+    //           </div>
+    //           <div className="card-body">
+    //             <div className="tab-content" id="custom-tabs-one-tabContent">
+    //               <div className="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+    //                 <form>
+    //                   <div className="form-group">
+    //                     <label >Confirme a presença de sua família até dia 10/08/2023</label>
+    //                     <div className="input-group input-group-lg">
+    //                       <input type="text" className="form-control" placeholder={!expire ? "Digite o código do convite" : "Prazo para confirmação encerrado"} aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={handleChange} value={key} readOnly={expire} />
+    //                       <span className="input-group-append">
+    //                         <span class="input-group-text" className={expire ? "input-group-text disabled" : "input-group-text"} onClick={handleShow}><i class="fas fa-search"></i></span>
+    //                       </span>
+    //                     </div>
+    //                   </div>
+    //                 </form>
+    //               </div>
+    //             </div>
+    //           </div>
+    //         </div>
+    //       </div></div>
+    //     <div className="container-fluid">
+    //       <div className="row">
+    //         <div className="col-md-12">
+
+
+    //         </div>
+    //       </div></div>
+    //   </section>
+    <div>
+      <div className="login-page" style={{  backgroundImage: `url(${background})`, backgroundRepeat: 'repeat', backgroundSize: 'contain' }}>
+        <div className="card card-outline" style={{ opacity: '0.7', width: '75%', minWidth: '250px', backgroundColor: '#f7acb0'}}>
+          <div className="card-header">
+          <h5 style={{color: "#fc0fc0",fontWeight: 'bold'}}><strong>Confirme a presença de sua família até dia 27/09/2023</strong></h5>
           </div>
-        </div>
-      </section>
-      <section className="content">
-        <div className="row">
-          <div className="col-12 col-sm-12">
-            <div className="card card-primary card-tabs">
-              <div className="card-header p-0 pt-1">
-                <ul className="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
-                  <li className="nav-item">
-                    <a className="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Confirmar Presença</a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Para o Grande Dia</a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Fica a Dica</a>
-                  </li>
-                </ul>
-              </div>
-              <div className="card-body">
-                <div className="tab-content" id="custom-tabs-one-tabContent">
-                  <div className="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-                    <form>
-                      <div className="form-group">
-                        <label >Confirme a presença de sua família até dia 10/08/2023</label>
-                        <div className="input-group input-group-lg">
-                          <input type="text" className="form-control" placeholder={!expire ? "Digite o código do convite" : "Prazo para confirmação encerrado"} aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={handleChange} value={key} readOnly={expire} />
-                          <span className="input-group-append">
-                            <span class="input-group-text" className={expire ? "input-group-text disabled" : "input-group-text"} onClick={handleShow}><i class="fas fa-search"></i></span>
-                          </span>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div className="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
-                    <Imagem>
-                      <img className="" src={grandeDia} alt="grande dia" />
-                    </Imagem>
-                  </div>
-                  <div className="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
-                    <Imagem>
-                    <img className="" src={ficaDica} alt="Fica a dica" />
-                    </Imagem>
+          <form>
+            <div className="card-body">
+              <form>
+                <div className="form-group">
+                 
+                  <div className="input-group input-group-lg">
+                    <input type="text" className="form-control" style={{color: '#fc0fc0',fontWeight: 'bold'}} placeholder={!expire ? "Digite o código do convite" : "Prazo para confirmação encerrado"} aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={handleChange} value={key} readOnly={expire} />
+                    <span className="input-group-append">
+                      <span class="input-group-text" className={expire ? "input-group-text disabled" : "input-group-text"} onClick={handleShow}><i class="fas fa-search"></i></span>
+                    </span>
                   </div>
                 </div>
-              </div>
+              </form>
             </div>
-          </div></div>
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-md-12">
-
+            <div className="card-footer">
 
             </div>
-          </div></div>
-      </section>
+          </form>
+        </div>
+        
+      </div >
 
-
-
-      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} size='lg'>
-        <Modal.Header>
-          <Modal.Title>Confirme quais convidados comparecerão</Modal.Title>
+      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} size='lg' style={{  backgroundImage: `url(${background})`, backgroundRepeat: 'repeat', backgroundSize: 'contain' }}>
+        <Modal.Header style={{ backgroundColor: '#f7acb0'}}>
+          <Modal.Title><label style={{color: "#fc0fc0"}}>Confirme quais convidados comparecerão</label></Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <div>
+        <Modal.Body style={{ backgroundColor: '#f7acb0'}}>
+          <div>  
             <section className="content">
               <div>
                 <Table striped bordered hover>
                   <thead>
                     <tr>
-                      <th>#</th>
-                      <th>Convidado</th>
+                      <th><span style={{color: "#fc0fc0"}}>#</span></th>
+                      <th><span style={{color: "#fc0fc0"}}>Convidado</span></th>
                     </tr>
                   </thead>
                   <tbody>
                     {convidados.map((c, index) => {
                       return (
                         <tr key={index}>
-                          <td><input type="checkbox" id={index} checked={c.column4} onChange={handleCheck}></input></td>
-                          <td>{c.column2}</td>
+                          <td><input type="checkbox" id={index} checked={c.column4} onChange={handleCheck} style={{accentColor: "#fc0fc0"}}></input></td>
+                          <td><span style={{color: "#fc0fc0"}}>{c.column2}</span></td>
                         </tr>
                       )
                     })}
                     <tr>
-                      <td colspan="2"><span className='float-right'><strong>{"*Confirme sua presença até dia 10/08/2023"}</strong></span></td>
+                      <td colspan="2"><span className='float-right' style={{color: "#fc0fc0"}}><strong>{"*Confirme sua presença até dia 27/09/2023"}</strong></span></td>
                     </tr>
                   </tbody>
                 </Table>
@@ -229,8 +236,8 @@ function App() {
             </section>
           </div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="success" onClick={handleSave}>Confirmar</Button>
+        <Modal.Footer style={{ backgroundColor: '#f7acb0'}}>
+          <Button variant="primary"  onClick={handleSave}>Confirmar</Button>
           <Button variant="secondary" onClick={handleClose}>
             Fechar
           </Button>
