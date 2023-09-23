@@ -23,7 +23,7 @@ export function Login(props) {
                 </div>
                     <div className="card-body">
                         <div className="form-group">
-                            <label>Email address</label>
+                            <label>Usuário</label>
                             <input type="text" className="form-control" id="userName" placeholder="Enter User" onChange={handleChange} value={user.userName || ""} />
                         </div>
                         <div className="form-group">

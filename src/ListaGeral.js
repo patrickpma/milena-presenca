@@ -37,7 +37,7 @@ export function ListaGeral(props) {
                 <Login authenticate={handleAuth}></Login>
             }
             {isLoged() && <div className="login-page">
-                <h5 style={{ fontWeight: 'bold' }}><strong>Confirme a presença de sua família até dia 27/09/2023</strong></h5>
+                <h5 style={{ fontWeight: 'bold' }}><strong>Lista de Convidados</strong></h5>
                 <div className="card card-primary card-outline" style={{ opacity: '0.7', width: '75%', height: '75%', minWidth: '250px', overflow: 'auto' }}>
                     <section className="content">
                         <div>
