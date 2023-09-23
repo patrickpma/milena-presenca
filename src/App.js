@@ -271,7 +271,7 @@ function App() {
               </div>
               <div className="card-footer">
                 <div className="card-tools">
-                  <a className="nav-link active float-right" href="#" data-toggle="tab" onClick={() => handleShow('admin')}>Area Restrita</a>
+                  <Button className="btn btn-default float-right ml-2" onClick={() => handleShow('admin')}>Area Restrita</Button>
                 </div>
               </div>
             </form>

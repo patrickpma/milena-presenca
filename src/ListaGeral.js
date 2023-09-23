@@ -28,7 +28,7 @@ export function ListaGeral(props) {
         else {
             setShow(true);
         }
-       
+
     }
 
     return (
@@ -74,14 +74,14 @@ export function ListaGeral(props) {
                     </section>
                 </div>
                 <div className="card card-primary card-outline" style={{ opacity: '0.7', width: '75%', overflow: 'auto' }}>
-                <div className="card-footer">
-                <div className="card-tools float-right">
-                <Button className="btn btn-default ml-2" onClick={onBack}>Voltar</Button>
-                <Button className="btn btn-default float-right ml-2" onClick={onExit}>Sair e Voltar</Button>
+                    <div className="card-footer">
+                        <div className="card-tools float-right">
+                            <Button className="btn btn-default ml-2" onClick={onBack}>Voltar</Button>
+                            <Button className="btn btn-default float-right ml-2" onClick={onExit}>Sair e Voltar</Button>
+                        </div>
+                    </div>
                 </div>
-              </div>
-                </div>
-               
+
             </div>}
         </React.Fragment>
     )
