@@ -1,16 +1,18 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import { Modal } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import background from "../src/img/02.png";
+import { ListaGeral } from './ListaGeral';
 
 
 function App() {
 
   const [show, setShow] = useState(false);
+  const [mode, setMode] = useState('');
   const [key, setKey] = useState('');
   const [token, setToken] = useState('');
   const [expire, setExpire] = useState(false);
@@ -43,6 +45,7 @@ function App() {
 
   const handleClose = () => {
     setShow(false);
+    setMode('');
   };
 
   const handleSave = () => {
@@ -63,32 +66,23 @@ function App() {
     setShow(false);
   };
 
-  const handleShow = () => {
-    if (expire)
-      return;
+  const handleShow = (mode) => {
 
-    let where = '';
+    if (mode === 'admin') {
 
-    if (!key) {
-      toast.error('Você esqueceu de informar o Código.');
-      return;
-    }
 
-    fetch(`https://api.veolink.com.br/api/portal/crud/_Table_1?filter=${where}`, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      method: 'GET',
-    }).then(res => res.json()).then(json => {
+      let where = '';
 
-      let filtered = json.data.filter(c => c.column3 === key);
+      fetch(`https://api.veolink.com.br/api/portal/crud/_Table_1?filter=${where}`, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        method: 'GET',
+      }).then(res => res.json()).then(json => {
 
-      if (filtered.length === 0)
-        toast.error('Código digitado não encontrado.');
-      else {
-        setConvidados(json.data.filter(c => c.column3 === key).sort((a, b) => {
+        setConvidados(json.data.sort((a, b) => {
           if (a.column2 > b.column2)
             return 1;
           if (a.column2 < b.column2)
@@ -96,11 +90,53 @@ function App() {
           // a must be equal to b
           return 0;
         }));
-        setShow(true);
+        setMode(mode)
         setKey('');
+      });
+
+    }
+    else {
+      if (expire)
+        return;
+
+      let where = '';
+
+      if (!key) {
+        toast.error('Você esqueceu de informar o Código.');
+        return;
       }
 
-    });
+      fetch(`https://api.veolink.com.br/api/portal/crud/_Table_1?filter=${where}`, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        method: 'GET',
+      }).then(res => res.json()).then(json => {
+
+        let filtered = json.data.filter(c => c.column3 === key);
+
+        if (filtered.length === 0)
+          toast.error('Código digitado não encontrado.');
+        else {
+          setConvidados(json.data.filter(c => c.column3 === key).sort((a, b) => {
+            if (a.column2 > b.column2)
+              return 1;
+            if (a.column2 < b.column2)
+              return -1;
+            // a must be equal to b
+            return 0;
+          }));
+          setShow(true);
+          setMode(mode)
+          setKey('');
+        }
+
+      });
+
+    }
+
 
   }
 
@@ -117,6 +153,38 @@ function App() {
     convidadosCopy[name].column4 = value;
 
     setConvidados(convidadosCopy);
+  }
+
+  const renderModal = () => {
+    return (
+      <div>
+        <section className="content">
+          <div>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th><span style={{ color: "#fc0fc0" }}>#</span></th>
+                  <th><span style={{ color: "#fc0fc0" }}>Convidado</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                {convidados.map((c, index) => {
+                  return (
+                    <tr key={index}>
+                      <td><input type="checkbox" id={index} checked={c.column4} onChange={handleCheck} style={{ accentColor: "#fc0fc0" }}></input></td>
+                      <td><span style={{ color: "#fc0fc0" }}>{c.column2}</span></td>
+                    </tr>
+                  )
+                })}
+                <tr>
+                  <td colspan="2"><span className='float-right' style={{ color: "#fc0fc0" }}><strong>{"*Confirme sua presença até dia 27/09/2023"}</strong></span></td>
+                </tr>
+              </tbody>
+            </Table>
+          </div>
+        </section>
+      </div>
+    )
   }
 
   return (
@@ -157,7 +225,7 @@ function App() {
     //                     <div className="input-group input-group-lg">
     //                       <input type="text" className="form-control" placeholder={!expire ? "Digite o código do convite" : "Prazo para confirmação encerrado"} aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={handleChange} value={key} readOnly={expire} />
     //                       <span className="input-group-append">
-    //                         <span class="input-group-text" className={expire ? "input-group-text disabled" : "input-group-text"} onClick={handleShow}><i class="fas fa-search"></i></span>
+    //                         <span className="input-group-text" className={expire ? "input-group-text disabled" : "input-group-text"} onClick={handleShow}><i className="fas fa-search"></i></span>
     //                       </span>
     //                     </div>
     //                   </div>
@@ -176,68 +244,51 @@ function App() {
     //       </div></div>
     //   </section>
     <div>
-      <div className="login-page" style={{  backgroundImage: `url(${background})`, backgroundRepeat: 'repeat', backgroundSize: 'contain' }}>
-        <div className="card card-outline" style={{ opacity: '0.7', width: '75%', minWidth: '250px', backgroundColor: '#f7acb0'}}>
-          <div className="card-header">
-          <h5 style={{color: "#fc0fc0",fontWeight: 'bold'}}><strong>Confirme a presença de sua família até dia 27/09/2023</strong></h5>
-          </div>
-          <form>
-            <div className="card-body">
-              <form>
-                <div className="form-group">
-                 
-                  <div className="input-group input-group-lg">
-                    <input type="text" className="form-control" style={{color: '#fc0fc0',fontWeight: 'bold'}} placeholder={!expire ? "Digite o código do convite" : "Prazo para confirmação encerrado"} aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={handleChange} value={key} readOnly={expire} />
-                    <span className="input-group-append">
-                      <span class="input-group-text" className={expire ? "input-group-text disabled" : "input-group-text"} onClick={handleShow}><i class="fas fa-search"></i></span>
-                    </span>
+      {mode === 'admin' &&
+        <ListaGeral data={convidados} onBack={handleClose} />
+      }
+      {mode !== 'admin' &&
+        <div className="login-page" style={{ backgroundImage: mode !== 'admin' ? `url(${background})` : '', backgroundRepeat: 'repeat', backgroundSize: 'contain' }}>
+
+          <div className="card card-outline" style={{ opacity: '0.7', width: '75%', minWidth: '250px', backgroundColor: '#f7acb0' }}>
+            <div className="card-header">
+              <h5 style={{ color: "#fc0fc0", fontWeight: 'bold' }}><strong>Confirme a presença de sua família até dia 27/09/2023</strong></h5>
+
+            </div>
+            <form>
+              <div className="card-body">
+                <form>
+                  <div className="form-group">
+
+                    <div className="input-group input-group-lg">
+                      <input type="text" className="form-control" style={{ color: '#fc0fc0', fontWeight: 'bold' }} placeholder={!expire ? "Digite o código do convite" : "Prazo para confirmação encerrado"} aria-label="Recipient's username" aria-describedby="basic-addon2" onChange={handleChange} value={key} readOnly={expire} />
+                      <span className="input-group-append">
+                        <span className={expire ? "input-group-text disabled" : "input-group-text"} onClick={() => handleShow('convidado')}><i className="fas fa-search"></i></span>
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </form>
-            </div>
-            <div className="card-footer">
-
-            </div>
-          </form>
-        </div>
-        
-      </div >
-
-      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} size='lg' style={{  backgroundImage: `url(${background})`, backgroundRepeat: 'repeat', backgroundSize: 'contain' }}>
-        <Modal.Header style={{ backgroundColor: '#f7acb0'}}>
-          <Modal.Title><label style={{color: "#fc0fc0"}}>Confirme quais convidados comparecerão</label></Modal.Title>
-        </Modal.Header>
-        <Modal.Body style={{ backgroundColor: '#f7acb0'}}>
-          <div>  
-            <section className="content">
-              <div>
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th><span style={{color: "#fc0fc0"}}>#</span></th>
-                      <th><span style={{color: "#fc0fc0"}}>Convidado</span></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {convidados.map((c, index) => {
-                      return (
-                        <tr key={index}>
-                          <td><input type="checkbox" id={index} checked={c.column4} onChange={handleCheck} style={{accentColor: "#fc0fc0"}}></input></td>
-                          <td><span style={{color: "#fc0fc0"}}>{c.column2}</span></td>
-                        </tr>
-                      )
-                    })}
-                    <tr>
-                      <td colspan="2"><span className='float-right' style={{color: "#fc0fc0"}}><strong>{"*Confirme sua presença até dia 27/09/2023"}</strong></span></td>
-                    </tr>
-                  </tbody>
-                </Table>
+                </form>
               </div>
-            </section>
+              <div className="card-footer">
+                <div className="card-tools">
+                  <a className="nav-link active float-right" href="#" data-toggle="tab" onClick={() => handleShow('admin')}>Area Restrita</a>
+                </div>
+              </div>
+            </form>
           </div>
+
+        </div >}
+
+      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} size='lg' style={{ backgroundImage: `url(${background})`, backgroundRepeat: 'repeat', backgroundSize: 'contain' }}>
+        <Modal.Header style={{ backgroundColor: '#f7acb0' }}>
+          <Modal.Title><label style={{ color: "#fc0fc0" }}>Confirme quais convidados comparecerão</label></Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{ backgroundColor: '#f7acb0' }}>
+          {mode === 'convidado' && renderModal()}
+
         </Modal.Body>
-        <Modal.Footer style={{ backgroundColor: '#f7acb0'}}>
-          <Button variant="primary"  onClick={handleSave}>Confirmar</Button>
+        <Modal.Footer style={{ backgroundColor: '#f7acb0' }}>
+          <Button variant="primary" onClick={handleSave}>Confirmar</Button>
           <Button variant="secondary" onClick={handleClose}>
             Fechar
           </Button>
