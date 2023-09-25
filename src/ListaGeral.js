@@ -63,7 +63,7 @@ export function ListaGeral(props) {
                                             <tr key={index}>
                                                 <td><span >{c.column2}</span></td>
                                                 <td><span >{c.column3}</span></td>
-                                                <td><span >{c.column4 ? 'Confirmando' : ''}</span></td>
+                                                <td><span >{c.column4 ? 'Confirmado' : 'Aguardando Confirmação'}</span></td>
                                                 <td><span >{Utils.dateFix(c.confirmacao)}</span></td>
                                             </tr>
                                         )
