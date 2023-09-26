@@ -177,7 +177,7 @@ function App() {
                   )
                 })}
                 <tr>
-                  <td colspan="2"><span className='float-right' style={{ color: "#fc0fc0" }}><strong>{"*Confirme sua presença até dia 27/09/2023"}</strong></span></td>
+                  <td colspan="2"><span className='float-right' style={{ color: "#fc0fc0" }}><strong>{"*Confirme sua presença até dia 30/09/2023"}</strong></span></td>
                 </tr>
               </tbody>
             </Table>
@@ -252,7 +252,7 @@ function App() {
 
           <div className="card card-outline" style={{ opacity: '0.7', width: '75%', minWidth: '250px', backgroundColor: '#f7acb0' }}>
             <div className="card-header">
-              <h5 style={{ color: "#fc0fc0", fontWeight: 'bold' }}><strong>Confirme a presença de sua família até dia 27/09/2023</strong></h5>
+              <h5 style={{ color: "#fc0fc0", fontWeight: 'bold' }}><strong>Confirme a presença de sua família até dia 30/09/2023</strong></h5>
 
             </div>
             <form>
